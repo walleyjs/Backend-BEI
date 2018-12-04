@@ -1,0 +1,19 @@
+{
+  "name": "backend-bei",
+  "version": "1.0.0",
+  "description": "You are required to implement the following:",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/walleyjs/Backend-BEI.git"
+  },
+  "author": "raji_bashir_olawale",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/walleyjs/Backend-BEI/issues"
+  },
+  "homepage": "https://github.com/walleyjs/Backend-BEI#readme"
+}
