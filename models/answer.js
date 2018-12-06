@@ -9,6 +9,12 @@ const answerSchema=new mongoose.Schema({
         },
         username: String
     },
-    response:{type:Boolean,default:false}
+    response:{type:Boolean,default:false},
+    comment:[
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "comment"
+        }
+    ]
 });
 module.export=mongoose.model("Answer",answerSchema);
