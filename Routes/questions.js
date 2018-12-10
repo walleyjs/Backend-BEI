@@ -4,12 +4,12 @@ const mongoose = require("mongoose");
 let Question = require("../models/questions");
 let User = require("../models/user");
 router.get("/", (req, res) => {
-    Question.find({},(err,question)=>{
+    Question.find({},(err,questions)=>{
         if (err) {
             console.log(err);
             console.log("=========question get err========");
         } else {
-            res.render("questions/post.ejs");
+            res.render("questions/post.ejs",{questions:questions});
         }
     });
 });
@@ -23,18 +23,26 @@ router.post("/",(req,res)=>{
         question:question,
         author:author
     };
-    Question.create(questions,(err,result)=>{
+    Question.create(questions,(err,questions)=>{
         if (err) {
             console.log(err);
             console.log("========question post err=======");
             res.redirect("/question");
         } else {
             res.redirect("/question");
-            console.log(result);
+            console.log(questions);
 
         }
         
     });
 });
-
+router.get("/:id",(req,res)=>{
+    Question.findById(req.params.id,(err,question)=>{
+        if (err) {
+            console.log(err);
+        } else {
+            res.render("questions/question.ejs",{question:question});
+        }
+    });
+});
 module.exports=router;
