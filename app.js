@@ -28,7 +28,9 @@ app.use("/question",questionRoute);
 app.use("/user", userRoute);
 app.get("/",(req,res)=>{
     res.send("home");
+    
 });
-const server=app.listen(app.get("port"),()=>{
+const server=app.listen(app.get("port"),(req,res,next)=>{
     console.log("you are listening to port "+ app.get("port"));
+    // console.log(req.user);
 });

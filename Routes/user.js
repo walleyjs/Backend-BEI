@@ -15,7 +15,7 @@ User.register(newUser,req.body.password,(err,user)=>{
         return res.redirect("/user/signup");
     } else {
         passport.authenticate("local")(req,res,()=>{
-        res.redirect("/");
+        res.redirect("/question");
                 });
             }
         });
@@ -24,7 +24,7 @@ User.register(newUser,req.body.password,(err,user)=>{
     res.render("users/userLogin.ejs");
 });
 router.post("/login",passport.authenticate("local",{
-    successRedirect:"/",
+    successRedirect:"/question",
     failureRedirect:"/user/login"
 }),(req,res)=>{
 
