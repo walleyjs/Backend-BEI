@@ -1,4 +1,7 @@
 <% include ../partials/footer %>
 <h1>POSTED QUESTION</h1>
 <%=question.question%>
+<form method="POST" action="/question/<%=question._id%>?_method=DELETE">
+    <button>Delete</button>
+</form>
 <% include ../partials/footer %>

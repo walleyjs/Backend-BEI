@@ -45,4 +45,16 @@ router.get("/:id",(req,res)=>{
         }
     });
 });
+router.delete("/:id",(req,res)=>{
+    Question.findByIdAndRemove(req.params.id,(err,delquest)=>{
+        if (err) {
+            console.log(err);
+            console.log("===============questiondel errr=====");
+        } else {
+            console.log("===============questiondel deleted=====");
+            console.log(delquest);
+            res.redirect("/question")
+        }
+    });
+});
 module.exports=router;
