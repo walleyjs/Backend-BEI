@@ -9,6 +9,8 @@ const methodOverride = require("method-override");
 const session=require("express-session");
 let User=require("./models/user");
 let Question=require("./models/questions");
+let Answer=require("./models/answer");
+let answerRoute=require("./Routes/answer");
 let questionRoute=require("./Routes/questions");
 let userRoute=require("./Routes/user");
 mongoose.connect("mongodb://localhost/dscProj",{ useNewUrlParser: true });
@@ -27,6 +29,7 @@ app.use(bodyParser.urlencoded({extended:true}));
 // app.use(()=>{   questionRoute});
 // app.use(() => { userRoute});
 app.use("/question",questionRoute);
+app.use("/answer",answerRoute);
 app.use("/user", userRoute);
 app.get("/",(req,res)=>{
     res.send("home");

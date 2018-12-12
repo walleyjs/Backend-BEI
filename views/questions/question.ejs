@@ -4,4 +4,18 @@
 <form method="POST" action="/question/<%=question._id%>?_method=DELETE">
     <button>Delete</button>
 </form>
+<h1>ans</h1>
+<ul>
+   <li>
+   <%question.answer.forEach((ans)=>{%>
+        <%=ans.answer%>
+        <%=ans.response%>
+   <%})%>
+   </li> 
+</ul>
+<form method="POST" action="/answer/<%=question._id%>">
+    <textarea rows="" cols="" name="answer" ></textarea>
+    <input type="radio" name="response" value="response">response
+    <button>Post Answer</button>
+</form>
 <% include ../partials/footer %>

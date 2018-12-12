@@ -17,4 +17,4 @@ const answerSchema=new mongoose.Schema({
         }
     ]
 });
-module.export=mongoose.model("Answer",answerSchema);
+module.exports=mongoose.model("Answer",answerSchema);

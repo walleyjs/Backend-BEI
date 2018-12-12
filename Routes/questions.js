@@ -2,7 +2,7 @@ const express=require("express");
 var router=express.Router({mergeParams:true});
 const mongoose = require("mongoose");
 let Question = require("../models/questions");
-let User = require("../models/user");
+let Answer=require("./answer");
 router.get("/", (req, res) => {
     Question.find({},(err,questions)=>{
         if (err) {
@@ -37,7 +37,7 @@ router.post("/",(req,res)=>{
     });
 });
 router.get("/:id",(req,res)=>{
-    Question.findById(req.params.id,(err,question)=>{
+    Question.findById(req.params.id).populate("answer").exec((err,question)=>{
         if (err) {
             console.log(err);
         } else {
@@ -57,4 +57,5 @@ router.delete("/:id",(req,res)=>{
         }
     });
 });
+
 module.exports=router;
