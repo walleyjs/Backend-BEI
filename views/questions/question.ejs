@@ -1,0 +1,22 @@
+<% include ../partials/header %>
+<h1>POSTED QUESTION</h1>
+<%=question.question%>
+<form method="POST" action="/question/<%=question._id%>?_method=DELETE">
+    <button>Delete</button>
+</form>
+<h1>ans</h1>
+<ul>
+   <li>
+   <%question.answer.forEach((ans)=>{%>
+        <%=ans.answer%>
+        <%=ans.response%>
+        <a href="/answer/<%=question._id%>/<%=ans._id%>">comment</a>
+   <%})%>
+   </li> 
+</ul>
+<form method="POST" action="/answer/<%=question._id%>">
+    <textarea rows="" cols="" name="answer" ></textarea>
+    <input type="radio" name="response" value="response">response
+    <button>Post Answer</button>
+</form>
+<% include ../partials/footer %>

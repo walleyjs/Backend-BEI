@@ -1,0 +1,11 @@
+<% include ../partials/header %>
+
+
+<%ans.comment.forEach((comment)=>{%>
+    <%=comment.comment%>
+<%})%>
+<form method="POST" action="/answer/<%=id%>/<%=ans._id%>">
+    <textarea rows="" cols="" name="comment"></textarea>
+    <button>comment</button>
+</form>
+<% include ../partials/footer %>
