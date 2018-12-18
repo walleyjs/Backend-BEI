@@ -4,21 +4,14 @@ const mongoose = require("mongoose");
 let Answer = require("../models/answer");
 let Question=require("../models/questions");
 let questionRoute=require("./questions");
+var middleware = require("../middleware");
 
-
-// router.post("/:id",(req,res)=>{
-//         let answer=req.body.answer;
-//         let author=req.body.author;
-//         let response=req.body.response;
-// });
-
-router.post("/:id",(req,res)=>{
+router.post("/:id",middleware.isLoggedIn,(req, res) => {
         let answer=req.body.answer;
         let author=req.body.author;
         let response=req.body.response;
         // console.log("======owk post question ans err==")
-    Question.findById(req.params.id,(err,question)=>{
-        
+    Question.findById(req.params.id,(err,question)=>{  
         if (err) {
             console.log("======post question ans err==");
             console.log(err);

@@ -7,6 +7,7 @@ const passportLocalMongoose = require("passport-local-mongoose");
 const localStrategy=require("passport-local");
 const methodOverride = require("method-override");
 const session=require("express-session");
+const flash=require("connect-flash");
 let User=require("./models/user");
 let Question=require("./models/questions");
 let Answer=require("./models/answer");
@@ -37,6 +38,11 @@ app.use("/answer/:id", commentRoute);
 
 app.get("/",(req,res)=>{
     res.send("home");   
+});
+app.use((req,res,next)=>{
+    res.locals.error=req.flash("error");
+    res.locals.success = req.flash("success");
+
 });
 const server=app.listen(app.get("port"),(req,res,next)=>{
     console.log("you are listening to port "+ app.get("port"));

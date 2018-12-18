@@ -2,6 +2,7 @@ const express=require("express");
 var router=express.Router({mergeParams:true});
 const mongoose = require("mongoose");
 let Question = require("../models/questions");
+var middlewareObj = require("../middleware");
 
 router.get("/", (req, res) => {
     if (req.query.search) {
@@ -30,10 +31,10 @@ router.get("/", (req, res) => {
     }
     
 });
-router.get("/askquestion",(req,res)=>{
+router.get("/askquestion",middlewareObj.isLoggedIn,(req, res) => {
     res.render("questions/askQuestion.ejs");
 });
-router.post("/",(req,res)=>{
+router.post("/", middlewareObj.isLoggedIn,(req, res) => {
     let question=req.body.question;
     let author={
         id:req.user._id,
@@ -65,7 +66,7 @@ router.get("/:id",(req,res)=>{
         }
     });
 });
-router.delete("/:id",(req,res)=>{
+router.delete("/:id", middlewareObj.checkQuestionOwnership, (req, res) => {
     Question.findByIdAndRemove(req.params.id,(err,delquest)=>{
         if (err) {
             console.log(err);
