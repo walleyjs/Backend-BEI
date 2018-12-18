@@ -2,15 +2,36 @@ const express=require("express");
 var router=express.Router({mergeParams:true});
 const mongoose = require("mongoose");
 let Question = require("../models/questions");
+
 router.get("/", (req, res) => {
-    Question.find({},(err,questions)=>{
-        if (err) {
-            console.log(err);
-            console.log("=========question get err========");
-        } else {
-            res.render("questions/post.ejs",{questions:questions});
-        }
-    });
+    if (req.query.search) {
+        const regex=new RegExp(escapeRegexp(req.query.search));
+        Question.find({question:regex},(err,questions)=>{
+            if (err) {
+                console.log(err);
+            } else {
+            res.render("questions/post.ejs", {
+                questions: questions
+            });
+                
+            }
+        });
+    } else {
+        Question.find({}, (err, questions) => {
+            if (err) {
+                console.log(err);
+                console.log("=========question get err========");
+            } else {
+                res.render("questions/post.ejs", {
+                    questions: questions
+                });
+            }
+        });
+    }
+    
+});
+router.get("/askquestion",(req,res)=>{
+    res.render("questions/askQuestion.ejs");
 });
 router.post("/",(req,res)=>{
     let question=req.body.question;
@@ -57,4 +78,7 @@ router.delete("/:id",(req,res)=>{
     });
 });
 
+function escapeRegexp(text) {
+    return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+};
 module.exports=router;

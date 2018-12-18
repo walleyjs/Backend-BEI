@@ -36,8 +36,7 @@ app.use("/user", userRoute);
 app.use("/answer/:id", commentRoute);
 
 app.get("/",(req,res)=>{
-    res.send("home");
-    
+    res.send("home");   
 });
 const server=app.listen(app.get("port"),(req,res,next)=>{
     console.log("you are listening to port "+ app.get("port"));

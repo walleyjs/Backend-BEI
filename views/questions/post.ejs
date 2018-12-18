@@ -1,8 +1,7 @@
 <% include ../partials/header %>
-<h1>POST YOUR QUESTIONS</h1>
-<form method="POST" action="/question">
-    <input type="text" name="question" value="" placeholder="question">
-    <button >Post</button> 
+<form action="/question" method="GET">
+<input type="text" name="search" value="" placeholder="search question">
+<button>Search</button>    
 </form>
 <%questions.forEach((question)=>{%>
 <ul>
