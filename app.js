@@ -29,6 +29,7 @@ passport.use(new localStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 app.use(bodyParser.urlencoded({extended:true}));
+app.use(flash());
 // app.use(()=>{   questionRoute});
 // app.use(() => { userRoute});
 app.use("/question",questionRoute);
@@ -42,7 +43,7 @@ app.get("/",(req,res)=>{
 app.use((req,res,next)=>{
     res.locals.error=req.flash("error");
     res.locals.success = req.flash("success");
-
+    return next();
 });
 const server=app.listen(app.get("port"),(req,res,next)=>{
     console.log("you are listening to port "+ app.get("port"));

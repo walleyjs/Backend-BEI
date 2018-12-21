@@ -4,9 +4,9 @@ const mongoose = require("mongoose");
 let Answer = require("../models/answer");
 let Question=require("../models/questions");
 let questionRoute=require("./questions");
-var middleware = require("../middleware");
+var middlewareObj = require("../middleware");
 
-router.post("/:id",middleware.isLoggedIn,(req, res) => {
+router.post("/:id",middlewareObj.isLoggedIn,(req, res) => {
         let answer=req.body.answer;
         let author=req.body.author;
         let response=req.body.response;

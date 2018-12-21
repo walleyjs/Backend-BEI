@@ -1,6 +1,6 @@
 var Question=require('../models/questions');
 var Answer = require('../models/answer');
-var Question = require('../models/comment');
+// var Question = require('../models/comment');
 var middlewareObj = {};
 middlewareObj.isLoggedIn = function (req, res, next) {
     if (req.isAuthenticated()) {
@@ -21,12 +21,14 @@ middlewareObj.checkQuestionOwnership = function (req, res, next) {
                     next();
                 } else {
                     req.flash("error", "you don't have permission to do that");
+                    console.log("you don't have permission to do that");
                     res.redirect("/question/" + question._id);
                 }
             }
         });
     } else {
         req.flash("error", "you need to be logged in to do that");
+        console.log("you need to be logged in to do that");
         res.redirect("/question");
     }
 };
